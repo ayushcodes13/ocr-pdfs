@@ -19,7 +19,7 @@ This dataset contains 100 numbered document folders, one PDF per folder. The fir
 
 “Likely OCR-candidate” is the existing page-level image-backed/sparse-text signal. It indicates that OCR may be useful; it does not prove physical paper-scan origin, failed OCR, or a fresh OCR requirement. “Pages not flagged” are pages without that candidate signal and must not be called impossible to OCR. All eight replacement PDFs have image-backed page content on every page; six have no selectable text, while AAQUARIES and 21STCENMGM have selectable OCR text layers.
 
-The rank score is the number of likely OCR-candidate pages, so high ranks prioritize more scan/OCR page volume. This is a stress-test suitability score, not a score of OCR output quality. `inventory.csv` gives per-document pages, candidate pages, hashes, sizes, and repository paths. `top_50_inventory.csv` indexes the first 50 without duplicating their PDFs.
+The rank score is the number of likely OCR-candidate pages, so high ranks prioritize more scan/OCR page volume. This is a stress-test suitability score, not a score of OCR output quality. `inventory.csv` gives per-document pages, candidate pages, hashes, sizes, and repository paths. `top_50_inventory.csv` indexes the first 50 without duplicating their PDFs. `direct_pdf_links.csv` provides one raw GitHub download URL per PDF for scripted retrieval.
 
 ## Per-PDF inventory
 
