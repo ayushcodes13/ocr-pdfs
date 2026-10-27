@@ -1,0 +1,147 @@
+{
+  "source_pdf": "OCR_Scanned_Documents_093-100_then_003-014.pdf",
+  "merged_pages": 927,
+  "source_pdfs": 18,
+  "qa_sessions": 20,
+  "qa_turns": 60,
+  "coverage_status": "Evidence-verified sampled benchmark. NOT a claim of exhaustive visual reading of every page of the 927-page corpus.",
+  "review_method": "Each source opened; representative cover, audit, financial tables, signatures, and cross-page examples visually inspected at rendered resolution. All 927 pages structurally checked for text/image content by PDF parser. Not all 927 pages visually read.",
+  "important_caveat": "For benchmarking, gold answers are constrained to pages directly inspected. Original scanned line item values should be double-checked before publishing a production-grade exhaustive evaluation set.",
+  "source_page_ranges": [
+    {
+      "num": "093",
+      "filename": "shiv fabritex international pvt ltd.pdf",
+      "start": 2,
+      "end": 61,
+      "pages": 60
+    },
+    {
+      "num": "094",
+      "filename": "Yugeri Marketing Private Limited.pdf",
+      "start": 62,
+      "end": 116,
+      "pages": 55
+    },
+    {
+      "num": "095",
+      "filename": "Gianna Agro Pvt. Ltd.pdf",
+      "start": 117,
+      "end": 147,
+      "pages": 31
+    },
+    {
+      "num": "096",
+      "filename": "Suruchi Dairy & Dairy Products.pdf",
+      "start": 148,
+      "end": 175,
+      "pages": 28
+    },
+    {
+      "num": "097",
+      "filename": "Meso Private Limited.pdf",
+      "start": 176,
+      "end": 194,
+      "pages": 19
+    },
+    {
+      "num": "098",
+      "filename": "CHANDRA NARAIN MACHINERY STORES PRIVATE LIMITED-(MCA).pdf",
+      "start": 195,
+      "end": 210,
+      "pages": 16
+    },
+    {
+      "num": "099",
+      "filename": "AAQUARIES GLOABAL INDUSTRIES LIMITED.pdf",
+      "start": 211,
+      "end": 219,
+      "pages": 9
+    },
+    {
+      "num": "100",
+      "filename": "21STCENMGM_qr_29_07_2025_171051.pdf",
+      "start": 220,
+      "end": 226,
+      "pages": 7
+    },
+    {
+      "num": "003",
+      "filename": "blob_007_007_tea_board_of_india__original_69th_annual_accounts_of_tea_board_india_2022_23.pdf",
+      "start": 227,
+      "end": 364,
+      "pages": 138
+    },
+    {
+      "num": "004",
+      "filename": "blob_029_029_department_of_science_and_technology__original_budget_2021_22.pdf",
+      "start": 365,
+      "end": 502,
+      "pages": 138
+    },
+    {
+      "num": "006",
+      "filename": "blob_146_146_federation_of_indian_petroleum_industry__original_pre_budget_memorandum_for_union_budget_2024_25.pdf",
+      "start": 503,
+      "end": 596,
+      "pages": 94
+    },
+    {
+      "num": "007",
+      "filename": "20MICRONS_ar_2011.pdf",
+      "start": 597,
+      "end": 686,
+      "pages": 90
+    },
+    {
+      "num": "009",
+      "filename": "blob_035_035_department_of_fertilizers__original_detailed_demand_for_grants_2022_23.pdf",
+      "start": 687,
+      "end": 774,
+      "pages": 88
+    },
+    {
+      "num": "010",
+      "filename": "blob_054_054_finance_industry_development_council__fidc__original_fidc_18th_annual_report_2021_22.pdf",
+      "start": 775,
+      "end": 813,
+      "pages": 39
+    },
+    {
+      "num": "011",
+      "filename": "blob_048_048_fintech_association_for_consumer_empowerment__face__original_state_of_alternative_data_in_india_a_lending_use_case.pdf",
+      "start": 814,
+      "end": 849,
+      "pages": 36
+    },
+    {
+      "num": "012",
+      "filename": "blob_123_123_indian_tea_association__ita__original_audited_accounts_for_fy_2023_24.pdf",
+      "start": 850,
+      "end": 876,
+      "pages": 27
+    },
+    {
+      "num": "013",
+      "filename": "blobextra_0e46676491d6_balance_sheet_2020_21.pdf",
+      "start": 877,
+      "end": 903,
+      "pages": 27
+    },
+    {
+      "num": "014",
+      "filename": "blob_049_049_indian_tea_association__ita__original_ita_statement_of_accounts_for_the_year_ended_31st_march__2021.pdf",
+      "start": 904,
+      "end": 927,
+      "pages": 24
+    }
+  ],
+  "question_type_counts": {
+    "Summarization / Overview": 18,
+    "High-Precision Extraction": 18,
+    "Visual & Multi-Hop Synthesis": 18,
+    "Multi-Hop Synthesis / Compliance Scope": 1,
+    "Cross-Document Summarization": 2,
+    "Cross-Document High-Precision Extraction": 2,
+    "Cross-Document / Visual Reasoning": 1
+  }
+}
