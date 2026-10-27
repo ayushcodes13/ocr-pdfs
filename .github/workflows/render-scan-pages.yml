@@ -1,0 +1,61 @@
+name: Render scanned PDF pages
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: scan-preview-renderer
+  cancel-in-progress: false
+
+jobs:
+  render:
+    if: >-
+      ${{ github.event.issue.pull_request == null &&
+          github.event.comment.user.login == 'ayushcodes13' &&
+          startsWith(github.event.comment.body, '/render ') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image renderer
+        run: pip install 'PyMuPDF==1.26.7' 'Pillow==12.0.0'
+      - name: Render requested pages
+        id: render
+        env:
+          SCAN_COMMAND: ${{ github.event.comment.body }}
+        run: |
+          python scripts/render_scan_pages.py --command "$SCAN_COMMAND" --output /tmp/scan-output
+      - name: Publish preview images to separate temporary branch
+        env:
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Orphan preview branch: no source PDFs or history are copied into it.
+          git checkout --orphan scan-preview-staging
+          git rm -rq --cached .
+          find . -mindepth 1 -maxdepth 1 -not -name '.git' -exec rm -rf -- {} +
+          cp /tmp/scan-output/* .
+          git add -A
+          git commit -m "Render scan page previews from ${SHA:0:12}"
+          git push --force origin HEAD:refs/heads/scan-previews
+      - name: Return preview link to the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --repo "$REPO" \
+            --body "Rendered scan pages are ready on the [scan-previews branch](https://github.com/$REPO/tree/scan-previews). Each page is a numbered JPEG, with metadata in manifest.json. Only the latest request is retained."
