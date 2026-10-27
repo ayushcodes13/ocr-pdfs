@@ -12,11 +12,15 @@ This repository contains exactly 100 deduplicated financial PDFs. Ranks 001–05
 | Total PDF pages | 10,921 |
 | Pages in preserved fully scanned PDFs | 2,743 |
 | Selectable-text layer pages among preserved full scans | 790 |
+| Preserved full-scan PDFs with selectable text on every page | 20 |
+| Preserved full-scan PDFs with selectable text on some pages | 8 |
+| Preserved full-scan PDFs with no selectable text layer | 22 |
+| OCR text-layer status of the added 50 PDFs | Not audited as OCR output |
 | Visually reviewed OCR-candidate pages in added 50 | 512 of 8,178 |
 | Added PDFs with every page flagged as OCR-relevant candidate | 6 |
 | Total current PDF bytes | 696,752,833 (0.697 GB; 0.649 GiB) |
 
-**Interpretation:** “Fully scanned” is reserved for the 50 preserved PDFs with every page verified as image-backed. The added 50 have known, visually reviewed OCR-relevant page numbers and counts. Six have every page marked as an OCR candidate, but they remain in the mixed/partial group because this audit did not certify full-page image coverage for the entire document. The remaining pages are not marked as OCR candidates; that does **not** prove they are non-OCRable or text-selectable. No OCR engine was run as part of this repository update.
+**Interpretation:** “Fully scanned” is reserved for the 50 preserved PDFs with every page verified as image-backed. The added 50 have known, visually reviewed OCR-relevant page numbers and counts. Six have every page marked as an OCR candidate, but they remain in the mixed/partial group because this audit did not certify full-page image coverage for the entire document. The remaining pages are not marked as OCR candidates; that does **not** prove they are non-OCRable or text-selectable. No OCR engine was run as part of this repository update. A selectable text layer is only an indicator that text is present; it does not certify OCR accuracy. The added 50 are OCR-input candidates, not completed OCR outputs.
 
 ## Ranked document inventory
 
