@@ -1,25 +1,25 @@
 # Financial OCR candidate dataset: ranked 100 PDFs
 
-This repository contains one PDF in each serial-numbered folder (`001__...` through `100__...`). Ranking and page counts are verified against the canonical dataset used for the Bynd Chat OCR stress-test preparation. The first 50 documents are the top-50 subset of this same ranked list. See [`top_50_inventory.csv`](top_50_inventory.csv) for that subset and [`inventory.csv`](inventory.csv) for all 100 PDFs.
+This dataset contains 100 numbered document folders, one PDF per folder. The first 50 are the top-50 subset. On 2026-10-27, ranks 093-100 were replaced with the eight fully scanned financial PDFs requested for OCR testing. The replacement documents are ordered by page count, descending.
 
 ## Dataset totals
 
 | Measure | Result |
 |---|---:|
 | PDFs | 100 |
-| Total PDF pages | 37,600 |
-| Likely OCR-candidate pages | 1,962 |
-| Pages not flagged as OCR candidates | 35,638 |
-| PDFs with candidate signal on every page | 12 |
-| PDFs with mixed/partial candidate signal | 88 |
-| Total file size | 827,591,961 bytes (0.828 GB; 0.771 GiB) |
+| Total PDF pages | 34,889 |
+| Likely OCR-candidate pages | 2,173 |
+| Pages not flagged as OCR candidates | 32,716 |
+| PDFs with candidate signal on every page | 19 |
+| PDFs with mixed/partial candidate signal | 81 |
+| Total file size | 795,108,797 bytes (0.795 GB; 0.741 GiB) |
 | Top 50 subset | 50 PDFs; 16,390 pages; 1,823 likely OCR-candidate pages |
 
-### How to read the OCR page counts
+### How to interpret page counts
 
-“Likely OCR-candidate” means the existing page-level audit found image-backed page content with sparse selectable text, a signal that OCR may be useful. It does not prove a physical scan, OCR failure, or that fresh OCR is required. “Pages not flagged as OCR candidates” is the remaining page count; those pages may be native text or already have a text layer. The available audit cannot establish that any page is impossible to OCR, so the 35,638 pages not flagged should not be interpreted as truly non-OCRable.
+“Likely OCR-candidate” is the existing page-level image-backed/sparse-text signal. It indicates that OCR may be useful; it does not prove physical paper-scan origin, failed OCR, or a fresh OCR requirement. “Pages not flagged” are pages without that candidate signal and must not be called impossible to OCR. All eight replacement PDFs have image-backed page content on every page; six have no selectable text, while AAQUARIES and 21STCENMGM have selectable OCR text layers.
 
-The rank order uses likely OCR-candidate page count (more candidate pages ranks higher), with the finance-only relevance review used to keep the dataset financially focused. The score is test-set suitability, not a quality score for OCR output. `inventory.csv` contains the serial, folder, original PDF name, page counts, candidate counts, candidate fraction, page-mix label, SHA-256, byte size, and repository path for each document.
+The rank score is the number of likely OCR-candidate pages, so high ranks prioritize more scan/OCR page volume. This is a stress-test suitability score, not a score of OCR output quality. `inventory.csv` gives per-document pages, candidate pages, hashes, sizes, and repository paths. `top_50_inventory.csv` indexes the first 50 without duplicating their PDFs.
 
 ## Per-PDF inventory
 
@@ -27,18 +27,18 @@ The rank order uses likely OCR-candidate page count (more candidate pages ranks 
 |---:|---|---:|---:|---:|---|
 | 001 | `001__sebi_207_INTERGLOBE_AVIATION_LIMITED_RHP` / `sebi_207_INTERGLOBE_AVIATION_LIMITED_RHP.pdf` | 519 | 274 | 245 | Mixed/partial |
 | 002 | `002__sebi_210_INTERGLOBE_AVIATION_LIMITED_FOD` / `sebi_210_INTERGLOBE_AVIATION_LIMITED_FOD.pdf` | 519 | 274 | 245 | Mixed/partial |
-| 003 | `003__blob_007_007_tea_board_of_india__original_69th_annual_accounts_of_tea_board_india_2022_23` / `blob_007_007_tea_board_of_india__original_69th_annual_accounts_of_tea_board_india_2022_23.pdf` | 138 | 138 | 0 | All pages |
-| 004 | `004__blob_029_029_department_of_science_and_technology__original_budget_2021_22` / `blob_029_029_department_of_science_and_technology__original_budget_2021_22.pdf` | 138 | 138 | 0 | All pages |
+| 003 | `003__blob_007_007_tea_board_of_india__original_69th_annual_accounts_of_tea_board_india_2022_23` / `blob_007_007_tea_board_of_india__original_69th_annual_accounts_of_tea_board_india_2022_23.pdf` | 138 | 138 | 0 | All pages image-backed |
+| 004 | `004__blob_029_029_department_of_science_and_technology__original_budget_2021_22` / `blob_029_029_department_of_science_and_technology__original_budget_2021_22.pdf` | 138 | 138 | 0 | All pages image-backed |
 | 005 | `005__blob_008_008_tea_board_of_india__original_annual_accounts_2020_21` / `blob_008_008_tea_board_of_india__original_annual_accounts_2020_21.pdf` | 251 | 118 | 133 | Mixed/partial |
-| 006 | `006__blob_146_146_federation_of_indian_petroleum_industry__original_pre_budget_memorandum_for_union_budget_2024_25` / `blob_146_146_federation_of_indian_petroleum_industry__original_pre_budget_memorandum_for_union_budget_2024_25.pdf` | 94 | 94 | 0 | All pages |
-| 007 | `007__20MICRONS_ar_2011` / `20MICRONS_ar_2011.pdf` | 90 | 90 | 0 | All pages |
+| 006 | `006__blob_146_146_federation_of_indian_petroleum_industry__original_pre_budget_memorandum_for_union_budget_2024_25` / `blob_146_146_federation_of_indian_petroleum_industry__original_pre_budget_memorandum_for_union_budget_2024_25.pdf` | 94 | 94 | 0 | All pages image-backed |
+| 007 | `007__20MICRONS_ar_2011` / `20MICRONS_ar_2011.pdf` | 90 | 90 | 0 | All pages image-backed |
 | 008 | `008__blobextra_f0d2442a79e3_IRIS_BUSINESS_SERVICES_LIMITED_FOD` / `blobextra_f0d2442a79e3_IRIS_BUSINESS_SERVICES_LIMITED_FOD.pdf` | 384 | 89 | 295 | Mixed/partial |
-| 009 | `009__blob_035_035_department_of_fertilizers__original_detailed_demand_for_grants_2022_23` / `blob_035_035_department_of_fertilizers__original_detailed_demand_for_grants_2022_23.pdf` | 88 | 88 | 0 | All pages |
-| 010 | `010__blob_054_054_finance_industry_development_council__fidc__original_fidc_18th_annual_report_2021_22` / `blob_054_054_finance_industry_development_council__fidc__original_fidc_18th_annual_report_2021_22.pdf` | 39 | 39 | 0 | All pages |
-| 011 | `011__blob_048_048_fintech_association_for_consumer_empowerment__face__original_state_of_alternative_data_in_india_a_lending_use_case` / `blob_048_048_fintech_association_for_consumer_empowerment__face__original_state_of_alternative_data_in_india_a_lending_use_case.pdf` | 36 | 36 | 0 | All pages |
-| 012 | `012__blob_123_123_indian_tea_association__ita__original_audited_accounts_for_fy_2023_24` / `blob_123_123_indian_tea_association__ita__original_audited_accounts_for_fy_2023_24.pdf` | 27 | 27 | 0 | All pages |
-| 013 | `013__blobextra_0e46676491d6_balance_sheet_2020_21` / `blobextra_0e46676491d6_balance_sheet_2020_21.pdf` | 27 | 27 | 0 | All pages |
-| 014 | `014__blob_049_049_indian_tea_association__ita__original_ita_statement_of_accounts_for_the_year_ended_31st_march__2021` / `blob_049_049_indian_tea_association__ita__original_ita_statement_of_accounts_for_the_year_ended_31st_march__2021.pdf` | 24 | 24 | 0 | All pages |
+| 009 | `009__blob_035_035_department_of_fertilizers__original_detailed_demand_for_grants_2022_23` / `blob_035_035_department_of_fertilizers__original_detailed_demand_for_grants_2022_23.pdf` | 88 | 88 | 0 | All pages image-backed |
+| 010 | `010__blob_054_054_finance_industry_development_council__fidc__original_fidc_18th_annual_report_2021_22` / `blob_054_054_finance_industry_development_council__fidc__original_fidc_18th_annual_report_2021_22.pdf` | 39 | 39 | 0 | All pages image-backed |
+| 011 | `011__blob_048_048_fintech_association_for_consumer_empowerment__face__original_state_of_alternative_data_in_india_a_lending_use_case` / `blob_048_048_fintech_association_for_consumer_empowerment__face__original_state_of_alternative_data_in_india_a_lending_use_case.pdf` | 36 | 36 | 0 | All pages image-backed |
+| 012 | `012__blob_123_123_indian_tea_association__ita__original_audited_accounts_for_fy_2023_24` / `blob_123_123_indian_tea_association__ita__original_audited_accounts_for_fy_2023_24.pdf` | 27 | 27 | 0 | All pages image-backed |
+| 013 | `013__blobextra_0e46676491d6_balance_sheet_2020_21` / `blobextra_0e46676491d6_balance_sheet_2020_21.pdf` | 27 | 27 | 0 | All pages image-backed |
+| 014 | `014__blob_049_049_indian_tea_association__ita__original_ita_statement_of_accounts_for_the_year_ended_31st_march__2021` / `blob_049_049_indian_tea_association__ita__original_ita_statement_of_accounts_for_the_year_ended_31st_march__2021.pdf` | 24 | 24 | 0 | All pages image-backed |
 | 015 | `015__blobextra_88844af589af_MAHINDRA_LOGISTICS_LIMITED_FOD` / `blobextra_88844af589af_MAHINDRA_LOGISTICS_LIMITED_FOD.pdf` | 573 | 22 | 551 | Mixed/partial |
 | 016 | `016__blobextra_d9f47ed8de3f_BSE_LIMITED_FOD` / `blobextra_d9f47ed8de3f_BSE_LIMITED_FOD.pdf` | 667 | 19 | 648 | Mixed/partial |
 | 017 | `017__blobextra_d20cb6a9bf63_BSE_LIMITED_RHP` / `blobextra_d20cb6a9bf63_BSE_LIMITED_RHP.pdf` | 659 | 19 | 640 | Mixed/partial |
@@ -85,7 +85,7 @@ The rank order uses likely OCR-candidate page count (more candidate pages ranks 
 | 058 | `058__blobextra_d6150fcf3b8f_HPL_ELECTRIC___POWER_LIMITED_RHP` / `blobextra_d6150fcf3b8f_HPL_ELECTRIC___POWER_LIMITED_RHP.pdf` | 469 | 4 | 465 | Mixed/partial |
 | 059 | `059__sebi_081_MOMAI_APPARELS_LIMITED_FOD` / `sebi_081_MOMAI_APPARELS_LIMITED_FOD.pdf` | 421 | 4 | 417 | Mixed/partial |
 | 060 | `060__blobextra_f0d370970dcc_UJJIVAN_FINANCIAL_SERVICES_LIMITED_DRHP` / `blobextra_f0d370970dcc_UJJIVAN_FINANCIAL_SERVICES_LIMITED_DRHP.pdf` | 391 | 4 | 387 | Mixed/partial |
-| 061 | `061__blobextra_ce38744b83cf_blobextra_for_the_year_2024_2025` / `blobextra_ce38744b83cf_blobextra_for_the_year_2024_2025.pdf` | 4 | 4 | 0 | All pages |
+| 061 | `061__blobextra_ce38744b83cf_blobextra_for_the_year_2024_2025` / `blobextra_ce38744b83cf_blobextra_for_the_year_2024_2025.pdf` | 4 | 4 | 0 | All pages image-backed |
 | 062 | `062__AU_SMALL_FINANCE_BANK_LIMITED_FOD` / `AU_SMALL_FINANCE_BANK_LIMITED_FOD.pdf` | 515 | 3 | 512 | Mixed/partial |
 | 063 | `063__GARDEN_REACH_SHIPBUILDERS_&_ENGINEERS_LIMITED_RHP` / `GARDEN_REACH_SHIPBUILDERS_&_ENGINEERS_LIMITED_RHP.pdf` | 515 | 3 | 512 | Mixed/partial |
 | 064 | `064__blobextra_2ecb0157f400_GARDEN_REACH_SHIPBUILDERS_&_ENGINEERS_LIMITED_FOD` / `blobextra_2ecb0157f400_GARDEN_REACH_SHIPBUILDERS_&_ENGINEERS_LIMITED_FOD.pdf` | 513 | 3 | 510 | Mixed/partial |
@@ -117,18 +117,17 @@ The rank order uses likely OCR-candidate page count (more candidate pages ranks 
 | 090 | `090__blobextra_d77802b199ca_GALAXY_SURFACTANTS_LTD_FOD` / `blobextra_d77802b199ca_GALAXY_SURFACTANTS_LTD_FOD.pdf` | 447 | 2 | 445 | Mixed/partial |
 | 091 | `091__GALAXY_SURFACTANTS_LTD_RHP` / `GALAXY_SURFACTANTS_LTD_RHP.pdf` | 445 | 2 | 443 | Mixed/partial |
 | 092 | `092__blobextra_627d6b00b51d_AVANA_LOGISTEK_LIMITED_DRHP` / `blobextra_627d6b00b51d_AVANA_LOGISTEK_LIMITED_DRHP.pdf` | 439 | 2 | 437 | Mixed/partial |
-| 093 | `093__GALAXY_SURFACTANTS_LTD_DRHP` / `GALAXY_SURFACTANTS_LTD_DRHP.pdf` | 433 | 2 | 431 | Mixed/partial |
-| 094 | `094__FUTURE_SUPPLY_CHAIN_SOLUTIONS_LIMITED_FOD` / `FUTURE_SUPPLY_CHAIN_SOLUTIONS_LIMITED_FOD.pdf` | 428 | 2 | 426 | Mixed/partial |
-| 095 | `095__INDIAN_ENERGY_EXCHANGE_LIMITED_FOD` / `INDIAN_ENERGY_EXCHANGE_LIMITED_FOD.pdf` | 414 | 2 | 412 | Mixed/partial |
-| 096 | `096__blobextra_4ea93e06aa2f_INDIAN_ENERGY_EXCHANGE_LIMITED_RHP` / `blobextra_4ea93e06aa2f_INDIAN_ENERGY_EXCHANGE_LIMITED_RHP.pdf` | 413 | 2 | 411 | Mixed/partial |
-| 097 | `097__blobextra_05a1609c50c2_ANMOL_INDUSTRIES_LIMITED_DRHP` / `blobextra_05a1609c50c2_ANMOL_INDUSTRIES_LIMITED_DRHP.pdf` | 411 | 2 | 409 | Mixed/partial |
-| 098 | `098__3MINDIA_ar_2021` / `3MINDIA_ar_2021.pdf` | 264 | 2 | 262 | Mixed/partial |
-| 099 | `099__LEMON_TREE_HOTELS_LIMITED_DRHP` / `LEMON_TREE_HOTELS_LIMITED_DRHP.pdf` | 572 | 1 | 571 | Mixed/partial |
-| 100 | `100__20MICRONS_ar_2013` / `20MICRONS_ar_2013.pdf` | 1 | 1 | 0 | All pages |
+| 093 | `093__shiv fabritex international pvt ltd` / `shiv fabritex international pvt ltd.pdf` | 60 | 60 | 0 | All pages image-backed |
+| 094 | `094__Yugeri Marketing Private Limited` / `Yugeri Marketing Private Limited.pdf` | 55 | 55 | 0 | All pages image-backed |
+| 095 | `095__Gianna Agro Pvt. Ltd` / `Gianna Agro Pvt. Ltd.pdf` | 31 | 31 | 0 | All pages image-backed |
+| 096 | `096__Suruchi Dairy & Dairy Products` / `Suruchi Dairy & Dairy Products.pdf` | 28 | 28 | 0 | All pages image-backed |
+| 097 | `097__Meso Private Limited` / `Meso Private Limited.pdf` | 19 | 19 | 0 | All pages image-backed |
+| 098 | `098__CHANDRA NARAIN MACHINERY STORES PRIVATE LIMITED-(MCA)` / `CHANDRA NARAIN MACHINERY STORES PRIVATE LIMITED-(MCA).pdf` | 16 | 16 | 0 | All pages image-backed |
+| 099 | `099__AAQUARIES GLOABAL INDUSTRIES LIMITED` / `AAQUARIES GLOABAL INDUSTRIES LIMITED.pdf` | 9 | 9 | 0 | All pages image-backed |
+| 100 | `100__21STCENMGM_qr_29_07_2025_171051` / `21STCENMGM_qr_29_07_2025_171051.pdf` | 7 | 7 | 0 | All pages image-backed |
 
 ## Verification
 
-- Copied and verified 100/100 PDFs; every repository copy matches its expected SHA-256 hash.
-- Page counts were checked from each PDF with PDFium: 37,600 pages total.
-- The selection is SHA-256 deduplicated; all 100 hashes are unique.
-- The full row-level inventory and top-50 subset inventory are included in the repository root.
+- All 100 PDFs have unique SHA-256 hashes.
+- Retained ranks 001-092 were checked against existing inventories; the eight new PDFs were verified against the prior ingestion-test hashes and PDFium page counts.
+- Per-document hashes and paths are in `inventory.csv`.
