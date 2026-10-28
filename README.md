@@ -1,5 +1,7 @@
 # Financial OCR dataset: 100 PDFs
 
+PDFs are stored directly in `Sources/Fully scan/` (ranks 001–050) and `Sources/Partial scan/` (ranks 051–100).
+
 | Rank | PDF document | Document pages | Scanned pages | Verification |
 |---:|---|---:|---:|---|
 | 001 | `annual_report_2023_24.pdf` | 680 | 680 | All pages image verified |
