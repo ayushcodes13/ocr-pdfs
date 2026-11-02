@@ -1,0 +1,115 @@
+{
+  "source_inventory_path": "citation-val/sources/PDFs",
+  "source_inventory_count": 20,
+  "original_selection_manifest_found": false,
+  "note": "No selection manifest is present in the main branch tree. This manifest documents the actual pilot selection; it is not presented as a recovered original.",
+  "inspection_method": "PyMuPDF against exact GitHub PDF bytes + manual rendered-page review",
+  "inspected_documents": [
+    {
+      "filename": "airo-lam-abridged-rhp-bid-application-form.pdf",
+      "pdf_pages": 12,
+      "sha256": "436badd69324a2eb65c101024e8e1d975cd6c451a29c62a6b824e245cecfb656",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "ecos-india-mobility-drhp-addendum-2024.pdf",
+      "pdf_pages": 24,
+      "sha256": "ef9e01d58e954770acdfaf0f6342ee1d03997e3421532625d206ce9cc00014a5",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "salvador-mica-ar-2022-23.pdf",
+      "pdf_pages": 8,
+      "sha256": "b437988a4063d8c1c74f2aed15f5d136be5f62265d10363292ee830636fffc3c",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "mapro_industries_reg29_share_sale_2026.pdf",
+      "pdf_pages": 3,
+      "sha256": "c4c64648192b0f241cc9545b89446fd78bf2a03d11f1610c5f4ec9ea7463d45e",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "ieema_industry_apr-dec_2023.pdf",
+      "pdf_pages": 10,
+      "sha256": "c5a356a2776610e4c58e002d84994c50c9f84b81348936e33cad9f21b995ebe2",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "tata-motors-q3-fy25-results.pdf",
+      "pdf_pages": 52,
+      "sha256": "2404a4f7710bbcd113aaa3294e2f147b66af7be9e56a584a993cca3835af998d",
+      "selected_for_pilot": true
+    },
+    {
+      "filename": "google-seo-starter-guide.pdf",
+      "pdf_pages": 32,
+      "sha256": "5f84ffca50d98be6a6d88c032fae87a6c67fe50d791d0bd6297024f3b5e6dab3",
+      "selected_for_pilot": false
+    },
+    {
+      "filename": "rizq-trust-financials-2020.pdf",
+      "pdf_pages": 9,
+      "sha256": "b79ac274b9a8861688781c5fe8b196701fe5f0ab0206c3e6a6747a1623a4c863",
+      "selected_for_pilot": false
+    }
+  ],
+  "selected_documents": [
+    {
+      "filename": "airo-lam-abridged-rhp-bid-application-form.pdf",
+      "pdf_pages": 12,
+      "sha256": "436badd69324a2eb65c101024e8e1d975cd6c451a29c62a6b824e245cecfb656",
+      "case_ids": [
+        "CIT-004",
+        "CIT-005"
+      ],
+      "flagged_for_visual_review": false
+    },
+    {
+      "filename": "ecos-india-mobility-drhp-addendum-2024.pdf",
+      "pdf_pages": 24,
+      "sha256": "ef9e01d58e954770acdfaf0f6342ee1d03997e3421532625d206ce9cc00014a5",
+      "case_ids": [
+        "CIT-003"
+      ],
+      "flagged_for_visual_review": false
+    },
+    {
+      "filename": "ieema_industry_apr-dec_2023.pdf",
+      "pdf_pages": 10,
+      "sha256": "c5a356a2776610e4c58e002d84994c50c9f84b81348936e33cad9f21b995ebe2",
+      "case_ids": [
+        "CIT-002"
+      ],
+      "flagged_for_visual_review": false
+    },
+    {
+      "filename": "mapro_industries_reg29_share_sale_2026.pdf",
+      "pdf_pages": 3,
+      "sha256": "c4c64648192b0f241cc9545b89446fd78bf2a03d11f1610c5f4ec9ea7463d45e",
+      "case_ids": [
+        "CIT-007"
+      ],
+      "flagged_for_visual_review": true
+    },
+    {
+      "filename": "salvador-mica-ar-2022-23.pdf",
+      "pdf_pages": 8,
+      "sha256": "b437988a4063d8c1c74f2aed15f5d136be5f62265d10363292ee830636fffc3c",
+      "case_ids": [
+        "CIT-006"
+      ],
+      "flagged_for_visual_review": true
+    },
+    {
+      "filename": "tata-motors-q3-fy25-results.pdf",
+      "pdf_pages": 52,
+      "sha256": "2404a4f7710bbcd113aaa3294e2f147b66af7be9e56a584a993cca3835af998d",
+      "case_ids": [
+        "CIT-001",
+        "CIT-008"
+      ],
+      "flagged_for_visual_review": false
+    }
+  ]
+}
