@@ -23,15 +23,11 @@ It does **not** assume one case per PDF or pretend all 20 source PDFs have been 
 | CIT-003 | ECOS India Mobility addendum | 5 | Wrong shareholder, same metric, same table | Extracted quote + image verified |
 | CIT-004 | Airo Lam abridged RHP | 2 (bad: 11) | Repeated header; bid application vs revision form | Extracted quote + image verified |
 | CIT-005 | Airo Lam abridged RHP | 7 | IPO use-of-proceeds table with unfilled percent cells | Extracted quote + image verified |
-| CIT-006 | Salvador Mica annual report | 3 | Noisy OCR: scanned dividend statement | **Flagged for OCR/visual review** |
-| CIT-007 | Mapro share sale disclosure | 1 | Image-only scanned text (no extracted text) | **Flagged for visual review** |
+| CIT-006 | Salvador Mica annual report | 3 | Noisy OCR: scanned dividend statement | Visually verified gold; OCR punctuation mismatch preserved |
+| CIT-007 | Mapro share sale disclosure | 1 | Image-only scanned text (no extracted text) | Visually verified gold transcription; extraction unavailable |
 | CIT-008 | Tata Motors Q3 FY25 | 45 (also good: 23) | The same true metric supported in different places | Extracted quote + image verified |
 
-**Important:** Strict extractable gold = 6 cases; visual/OCR-sensitive candidates = 2.
-Both flagged cases have visually observed answers and transcribed passages, but
-their text spans cannot be certified as exact by extraction. They must remain
-flagged until a separate human visual/line-break check accepts them. Never
-silently convert an OCR string with corrupted punctuation into an exact quote.
+**Important:** Six cases are exact text extraction matches; two are visually verified OCR/image gold. For CIT-006, the printed sentence ends with a period while embedded OCR has a spurious apostrophe. For CIT-007, the page is image-only. The visual transcriptions are gold for human comparison, not exact extracted spans. Never silently convert noisy OCR into an extraction-exact quote.
 
 Page numbers are 1-based **physical PDF page indexes**. A document's printed
 page label can differ: e.g., ECOS physical PDF page 5 is printed page 2;
@@ -58,13 +54,14 @@ python citation-val/evals/validate_pilot.py
 
 The validator opens the actual PDF files, checks SHA-256, checks original PDF
 page indexes, tests exact *verbatim* supporting and negative passages against
-the named page, and ensures all required categories are present. It reports
-visual-review candidates separately, rather than marking them as strict gold.
+the named page, and ensures all required categories are present. It reports extraction-exact cases, visually approved OCR/image cases, and any cases still pending visual review separately.
 
 The `inspect_pdfs.py` utility can regenerate a transient extraction report for
-further manual triage. It is not a gold set generator. The pilot should not be
-expanded before the two flagged cases are visually signed off and citation
-precision is measured on a real model run.
+further manual triage. It is not a gold set generator. The pilot remains intentionally small. Before broadening it, review the scoring contract and run the cases against the target chat system; this repository-only validation does not prove live citation behavior.
+
+## Scoring and runtime checks
+
+See [`evaluation_protocol.md`](evaluation_protocol.md) for the four independent checks, exact denominator definitions, result-record fields, and how to treat green/orange chips. Each case in `pilot_cases.json` carries its accepted citations, known decoys, and case-level expectations for citation presence, structure, claim support, and opening/highlighting. These are expected behaviors; no Bynd answer or UI run has been scored yet.
 
 ## Suggested rubric for citation evaluators
 
@@ -78,4 +75,4 @@ precision is measured on a real model run.
 7. **Legitimate alternatives**: any independently supporting cited page is
    valid, even if it is not the primary expected page.
 
-No evaluation-model outputs are claimed. This is a ground-truth fixture pilot.
+No evaluation-model outputs are claimed. This is a ground-truth fixture pilot. See `evaluation_protocol.md` for the proposed, unweighted score report and runtime result format.

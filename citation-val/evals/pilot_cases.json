@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1",
+  "schema_version": "0.2",
   "dataset_name": "citation-pilot-small-varied",
   "created_date": "2026-11-02",
   "source_repository": "ayushcodes13/ocr-pdfs",
@@ -47,6 +47,64 @@
           46
         ],
         "status": "verified"
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "₹1,13,575 crore",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 45
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "₹1,13,575 crore",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "tata-motors-q3-fy25-results.pdf",
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 45,
+              "region": "Financials table, Revenue from operations row, far-right Consolidated column",
+              "exact_passage": " Revenue from operations                                                      81,264             18,431           12,354          1,526         1,13,575",
+              "printed_page_label": "45"
+            }
+          ],
+          "rejected_evidence": [
+            {
+              "pdf_filename": "tata-motors-q3-fy25-results.pdf",
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 46,
+              "exact_passage": " Revenue from operations                                                      76,655             20,123           12,910           889         1,10,577",
+              "why_rejected": "Page 46 is the Q3 FY24 quarter ended December 31, 2023, not Q3 FY25. The identical row label and table structure do not make its 1,10,577 value support the 2024 quarter claim."
+            }
+          ],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 45,
+              "region": "Financials table, Revenue from operations row, far-right Consolidated column"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -75,7 +133,57 @@
         ],
         "status": "verified"
       },
-      "note": "The PDF heading expresses a comparison period; use the value 34.6, not the adjacent LVSWGR value 14.8 in the right-hand table."
+      "note": "The PDF heading expresses a comparison period; use the value 34.6, not the adjacent LVSWGR value 14.8 in the right-hand table.",
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "34.6 (growth index, percent comparison shown in chart)",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/ieema_industry_apr-dec_2023.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/ieema_industry_apr-dec_2023.pdf",
+              "pdf_page_number_1_based": 8
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "34.6 (growth index, percent comparison shown in chart)",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "ieema_industry_apr-dec_2023.pdf",
+              "source_path": "citation-val/sources/PDFs/ieema_industry_apr-dec_2023.pdf",
+              "pdf_page_number_1_based": 8,
+              "region": "Detailed Growth Index for Electrical Equipment Industry, left-hand table, Distribution Transformer row",
+              "exact_passage": "Distribution Transformer           34.6     LVSWGR                       14.8",
+              "printed_page_label": null
+            }
+          ],
+          "rejected_evidence": [],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/ieema_industry_apr-dec_2023.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 8,
+              "region": "Detailed Growth Index for Electrical Equipment Industry, left-hand table, Distribution Transformer row"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
+      }
     },
     {
       "id": "CIT-003",
@@ -111,6 +219,64 @@
           5
         ],
         "status": "verified"
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "33.50%",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/ecos-india-mobility-drhp-addendum-2024.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/ecos-india-mobility-drhp-addendum-2024.pdf",
+              "pdf_page_number_1_based": 5
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "33.50%",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "ecos-india-mobility-drhp-addendum-2024.pdf",
+              "source_path": "citation-val/sources/PDFs/ecos-india-mobility-drhp-addendum-2024.pdf",
+              "pdf_page_number_1_based": 5,
+              "region": "Offer Document Summary, first shareholding table, Rajesh Loomba row, Post-Offer Equity Share Capital percentage column",
+              "exact_passage": "Rajesh Loomba  (also a  Selling            29,999,997               50.00          20,099,997               33.50",
+              "printed_page_label": "2"
+            }
+          ],
+          "rejected_evidence": [
+            {
+              "pdf_filename": "ecos-india-mobility-drhp-addendum-2024.pdf",
+              "source_path": "citation-val/sources/PDFs/ecos-india-mobility-drhp-addendum-2024.pdf",
+              "pdf_page_number_1_based": 5,
+              "exact_passage": "Aditya Loomba  (also a  Selling            23,999,999               40.00          15,899,999               26.50",
+              "why_rejected": "26.50% is the post-Offer holding of Aditya Loomba, not Rajesh Loomba. This is the same table and same metric but the wrong shareholder row."
+            }
+          ],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/ecos-india-mobility-drhp-addendum-2024.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 5,
+              "region": "Offer Document Summary, first shareholding table, Rajesh Loomba row, Post-Offer Equity Share Capital percentage column"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -148,6 +314,64 @@
           11
         ],
         "status": "verified"
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "Bid Cum Application Form",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+              "pdf_page_number_1_based": 2
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "Bid Cum Application Form",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "airo-lam-abridged-rhp-bid-application-form.pdf",
+              "source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+              "pdf_page_number_1_based": 2,
+              "region": "Top black header bar, line immediately below the common abridged-prospectus heading",
+              "exact_passage": "                   BIDDER’S UNDERTAKING FOR BID CUM APPLICATION FORM",
+              "printed_page_label": "2"
+            }
+          ],
+          "rejected_evidence": [
+            {
+              "pdf_filename": "airo-lam-abridged-rhp-bid-application-form.pdf",
+              "source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+              "pdf_page_number_1_based": 11,
+              "exact_passage": "                        BIDDER’S UNDERTAKING FOR REVISION FORM",
+              "why_rejected": "The generic abridged-prospectus heading is identical on both pages, but the later page explicitly identifies a Revision Form rather than the original Bid Cum Application Form."
+            }
+          ],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 2,
+              "region": "Top black header bar, line immediately below the common abridged-prospectus heading"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -176,6 +400,56 @@
           7
         ],
         "status": "verified"
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "₹1,265.00 lakhs",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+              "pdf_page_number_1_based": 7
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "₹1,265.00 lakhs",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "airo-lam-abridged-rhp-bid-application-form.pdf",
+              "source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+              "pdf_page_number_1_based": 7,
+              "region": "Use of Net Proceeds table, first object row Working Capital Requirements, Amount to be financed from Net Proceeds of the Issue column",
+              "exact_passage": "Working Capital Requirements                                            1265.00",
+              "printed_page_label": "7"
+            }
+          ],
+          "rejected_evidence": [],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/airo-lam-abridged-rhp-bid-application-form.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 7,
+              "region": "Use of Net Proceeds table, first object row Working Capital Requirements, Amount to be financed from Net Proceeds of the Issue column"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -202,9 +476,62 @@
         "rendered_pages_checked": [
           3
         ],
-        "status": "visual_confirmed_but_ocr_quote_requires_review",
-        "visual_review_required": true,
-        "reason": "OCR has an incorrect terminal apostrophe in place of the printed full stop, and neighboring scan text is garbled. Do not treat exact-match OCR as reliable."
+        "status": "verified_visual_transcription_ocr_mismatch",
+        "visual_review_required": false,
+        "review_method": "Human visual comparison of 140 dpi rendered physical PDF page 3 against the answer passage.",
+        "visual_transcription_exact": "The company does not propose any dividend during the current year.",
+        "extraction_observation_exact": "The company does not propose any dividend during the current year'",
+        "reason": "The printed page clearly ends the sentence with a full stop; the embedded OCR has a spurious apostrophe. Gold transcription is taken from the rendered page, not the OCR string."
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "No, it did not propose any dividend for the current year.",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/salvador-mica-ar-2022-23.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/salvador-mica-ar-2022-23.pdf",
+              "pdf_page_number_1_based": 3
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "No, it did not propose any dividend for the current year.",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "salvador-mica-ar-2022-23.pdf",
+              "source_path": "citation-val/sources/PDFs/salvador-mica-ar-2022-23.pdf",
+              "pdf_page_number_1_based": 3,
+              "region": "Director's Report, below Financial Results and State of Affairs/Highlights, Dividend subsection",
+              "exact_passage": "The company does not propose any dividend during the current year.",
+              "printed_page_label": null
+            }
+          ],
+          "rejected_evidence": [],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/salvador-mica-ar-2022-23.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 3,
+              "region": "Director's Report, below Financial Results and State of Affairs/Highlights, Dividend subsection"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -231,9 +558,61 @@
         "rendered_pages_checked": [
           1
         ],
-        "status": "visual_confirmed_but_extraction_unavailable",
-        "visual_review_required": true,
-        "reason": "PyMuPDF extracts no text from this image-only page. Passage is transcribed visually and cannot be certified by text span matching."
+        "status": "verified_visual_transcription_image_only",
+        "visual_review_required": false,
+        "review_method": "Human visual comparison of 140 dpi rendered physical PDF page 1 against the answer passage.",
+        "visual_transcription_exact": "3,25,000 equity shares of the Mapro Industries Ltd. by me up to July 9, 2026.",
+        "reason": "The relevant sentence is clearly legible on the rendered image-only page; PyMuPDF returns no text for the page, so this remains visual gold rather than extraction-exact gold."
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "3,25,000 equity shares",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/mapro_industries_reg29_share_sale_2026.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/mapro_industries_reg29_share_sale_2026.pdf",
+              "pdf_page_number_1_based": 1
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "3,25,000 equity shares",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "mapro_industries_reg29_share_sale_2026.pdf",
+              "source_path": "citation-val/sources/PDFs/mapro_industries_reg29_share_sale_2026.pdf",
+              "pdf_page_number_1_based": 1,
+              "region": "Covering letter, central paragraph following Dear Sir, after reference to Annexure A",
+              "exact_passage": "3,25,000 equity shares of the Mapro Industries Ltd. by me up to July 9, 2026.",
+              "printed_page_label": null
+            }
+          ],
+          "rejected_evidence": [],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/mapro_industries_reg29_share_sale_2026.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 1,
+              "region": "Covering letter, central paragraph following Dear Sir, after reference to Annexure A"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     },
     {
@@ -269,7 +648,79 @@
           45
         ],
         "status": "verified"
+      },
+      "evaluation_expectations": {
+        "citation_presence": {
+          "required": true,
+          "required_claim": "12.4%",
+          "pass_rule": "At least one citation is attached to this claim. An uncited answer fails this check even when the answer text is correct."
+        },
+        "citation_structure": {
+          "required_source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+          "accepted_source_pages": [
+            {
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 45
+            },
+            {
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 23
+            }
+          ],
+          "pass_rule": "Citation payload parses and resolves to an accepted source and physical PDF page; page and document version must be real."
+        },
+        "claim_support": {
+          "required_claim": "12.4%",
+          "accepted_evidence": [
+            {
+              "pdf_filename": "tata-motors-q3-fy25-results.pdf",
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 45,
+              "region": "Tata Motors Group Financials, EBITDA Margin row, Tata Commercial Vehicles column",
+              "exact_passage": " EBITDA Margin                                                           14.2%            12.4%            7.8%         NA          13.7%",
+              "printed_page_label": "45"
+            },
+            {
+              "pdf_filename": "tata-motors-q3-fy25-results.pdf",
+              "source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+              "pdf_page_number_1_based": 23,
+              "region": "Alternative independently supporting location",
+              "exact_passage": " Q3: Revenue             ₹18.4K Cr, EBITDA 12.4%, PBT(bei) ₹1.7K Cr",
+              "printed_page_label": "23"
+            }
+          ],
+          "rejected_evidence": [],
+          "pass_rule": "The cited span and its table/form context support this exact claim, including entity, period, units, row/column, and qualifiers. A matching heading or number alone is insufficient."
+        },
+        "open_and_highlight": {
+          "expected_source_path": "citation-val/sources/PDFs/tata-motors-q3-fy25-results.pdf",
+          "accepted_locations": [
+            {
+              "pdf_page_number_1_based": 45,
+              "region": "Tata Motors Group Financials, EBITDA Margin row, Tata Commercial Vehicles column"
+            },
+            {
+              "pdf_page_number_1_based": 23,
+              "region": "Alternative independently supporting location"
+            }
+          ],
+          "pass_rule": "Opening the citation reaches an accepted source page and the highlight overlaps the supporting text or table cell, not only a nearby heading or decoy."
+        },
+        "color_interpretation": {
+          "observed_colors": [
+            "green",
+            "orange"
+          ],
+          "rule": "Record the chip color as an observation. Green can mean the text was found on that page; it does not prove claim support. A green citation to rejected_evidence still fails claim_support.",
+          "color_alone_is_pass": false
+        }
       }
     }
+  ],
+  "evaluation_axes": [
+    "citation_presence",
+    "citation_structure",
+    "claim_support",
+    "open_and_highlight"
   ]
 }

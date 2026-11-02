@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Validate citation pilot fields against original PDF bytes.
 
-Only text-exact, visually-checked records count as strict gold.
-Visual-transcription records are preserved as flagged candidates, not silently
-passed as extraction-verified.
+Exact text matches and human-verified visual transcriptions are reported separately.
+Visual records are never mislabeled as extraction-exact.
 """
 import hashlib
 import json
@@ -26,7 +25,7 @@ def run():
     check(len(DATA["cases"]) <= 12, "Pilot expanded too far")
     check(len(MANIFEST["selected_documents"]) < 20, "Pilot must remain a subset")
     filenames = {d["filename"] for d in MANIFEST["selected_documents"]}
-    docs, strict, review = {}, 0, 0
+    docs, strict, visual_gold, review = {}, 0, 0, 0
     try:
         for d in MANIFEST["selected_documents"]:
             src = SOURCE / d["filename"]
@@ -53,20 +52,41 @@ def run():
             check(c["exact_supporting_passage"], f"{key}: missing passage")
             page = doc[page_num - 1]
             extracted = page.get_text("text", sort=True)
-            flag = c["verification"].get("visual_review_required", False)
-            if flag:
+            verification = c["verification"]
+            status = verification["status"]
+            if status.startswith("verified_visual_transcription_"):
+                visual_gold += 1
+                check(verification.get("visual_review_required") is False,
+                      f"{key}: visually approved case still marked pending")
+                check(verification.get("text_exact_match") is False,
+                      f"{key}: visual transcription must not claim extraction-exact text")
+                check(verification.get("source", "").startswith("rendered_scanned_page"),
+                      f"{key}: missing rendered-page review marker")
+                check(verification.get("review_method"), f"{key}: missing human review method")
+                check(page_num in verification.get("rendered_pages_checked", []),
+                      f"{key}: reviewed render page is not the gold evidence page")
+                check(verification.get("visual_transcription_exact") == c["exact_supporting_passage"],
+                      f"{key}: visual transcription differs from gold passage")
+                if extracted.strip():
+                    observation = verification.get("extraction_observation_exact")
+                    check(observation and observation in extracted,
+                          f"{key}: OCR observation not recorded or not found")
+                    check(observation != c["exact_supporting_passage"],
+                          f"{key}: OCR mismatch status but OCR matches visual gold")
+                else:
+                    check("image_only" in status, f"{key}: empty extraction not identified as image-only")
+            elif verification.get("visual_review_required", False):
                 review += 1
-                check(c["verification"]["status"] != "verified", f"{key}: review flagged as gold")
-                check(c["verification"]["source"].startswith("rendered_scanned_page"),
+                check(status != "verified", f"{key}: pending review flagged as exact gold")
+                check(verification.get("source", "").startswith("rendered_scanned_page"),
                       f"{key}: missing visual-method marker")
                 if extracted.strip():
-                    check("extraction_observation_exact" in c,
-                          f"{key}: OCR text present but observation not recorded")
-                    check(c["extraction_observation_exact"] in extracted,
+                    observation = verification.get("extraction_observation_exact") or c.get("extraction_observation_exact")
+                    check(observation and observation in extracted,
                           f"{key}: recorded OCR observation not found")
             else:
                 strict += 1
-                check(c["verification"].get("text_exact_match") is True,
+                check(verification.get("text_exact_match") is True,
                       f"{key}: must be text-exact")
                 check(c["exact_supporting_passage"] in extracted,
                       f"{key}: exact passage not in original PDF page {page_num}")
@@ -92,14 +112,23 @@ def run():
                     if field != "also_valid_citation":
                         check(item.get("why_it_does_not_support"),
                               f"{key}: no decoy justification")
+            checks = c.get("evaluation_expectations", {})
+            required_axes = ("citation_presence", "citation_structure", "claim_support", "open_and_highlight")
+            check(all(axis in checks for axis in required_axes), f"{key}: missing evaluation axis")
+            check(checks["citation_presence"].get("required") is True,
+                  f"{key}: citation-required claim must be explicit")
+            check(checks["claim_support"].get("accepted_evidence"),
+                  f"{key}: no accepted evidence locations")
+            check(checks["open_and_highlight"].get("accepted_locations"),
+                  f"{key}: no expected open/highlight locations")
             print(f"PASS {key}: {c['pdf_filename']} p{page_num} "
-                  f"{'VISUAL REVIEW FLAG' if flag else 'EXACT QUOTE'}")
+                  f"{'VISUALLY VERIFIED GOLD' if status.startswith('verified_visual_transcription_') else 'VISUAL REVIEW FLAG' if verification.get('visual_review_required', False) else 'EXACT QUOTE'}")
         all_types = {t for c in DATA["cases"] for t in c["case_types"]}
         for t in ("table_value", "ocr_scanned_text", "repeated_text_matches",
                   "valid_looking_but_non_supporting"):
             check(t in all_types, f"Missing required case type: {t}")
-        print(f"RESULT: {strict} extractable, exact-match cases verified; "
-              f"{review} visual/OCR cases flagged; {len(DATA['cases'])} total")
+        print(f"RESULT: {strict} extractable exact-match cases; {visual_gold} visually verified OCR/image cases; "
+              f"{review} cases pending visual review; {len(DATA['cases'])} total")
     finally:
         for pdf in docs.values():
             pdf.close()
